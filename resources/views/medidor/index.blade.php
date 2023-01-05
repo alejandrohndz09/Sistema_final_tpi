@@ -36,10 +36,10 @@ use App\Models\Canton;
                                 <tr>
                                     
                                     
-                                    <th>Ubicación</th>
-                                    <th>Sector</th>
-                                    <th>Responsable</th>
-                                    <th>Acciones</th>
+                                    <th class="col-sm-1" >Código</th>
+                                    <th>Ubicación/Sector</th>
+                                    <th>Dueño</th>
+                                    <th class="col-sm-1"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,9 +58,12 @@ use App\Models\Canton;
                                     @endif  
                                     <tr>
                                         
-                                        <td>{{ $medidor->idMedidores }}</td>
+                                        <th scope="row">{{ $medidor->idMedidores }}</th>
                                         <td>{{ $medidor->referencia }}</td>
                                         <td>{{$medidor->persona==null?'No asignado':$medidor->persona->toString}}</td>
+                                        <td >
+                                          @include('medidor.dropdown')
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
