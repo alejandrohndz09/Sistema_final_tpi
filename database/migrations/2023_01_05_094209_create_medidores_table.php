@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('idMedidores', true);
             $table->string('ruta')->nullable();
             $table->string('referencia')->nullable();
-            $table->integer('idUsuario')->nullable()->index('idUsuario');
+            $table->string('idPersona', 11)->nullable()->index('idUsuario');
             $table->integer('idCanton')->nullable()->index('MedidorCanton');
         });
     }

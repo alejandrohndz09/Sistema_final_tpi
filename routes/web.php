@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
 Route::resource('consumo', 'App\Http\Controllers\ConsumoController');
-Route::resource('medidores', 'App\Http\Controllers\MedidoreController');
+Route::resource('medidor', 'App\Http\Controllers\MedidorController');

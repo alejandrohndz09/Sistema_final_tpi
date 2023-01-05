@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('consumo', function (Blueprint $table) {
             $table->comment('');
-            $table->decimal('lectura_anterior', 10)->nullable()->index('lectura_anterior');
+            $table->decimal('lectura_anterior', 10)->nullable()->index('lectura_anterior_2');
             $table->decimal('lectura_actual', 10)->nullable();
             $table->dateTime('fecha_a_facturar')->nullable();
             $table->dateTime('desde')->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('idMedidores')->nullable()->index('ConsumoMedidores');
             $table->decimal('mora', 10)->nullable();
 
-            $table->index(['lectura_anterior'], 'lectura_anterior_2');
+            $table->index(['lectura_anterior'], 'lectura_anterior');
         });
     }
 

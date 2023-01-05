@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Consumo;
+use App\Models\Medidor;
 use Illuminate\Http\Request;
 
 /**
- * Class ConsumoController
+ * Class MedidorController
  * @package App\Http\Controllers
  */
-class ConsumoController extends Controller
+class MedidorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +18,10 @@ class ConsumoController extends Controller
      */
     public function index()
     {
-        $consumos = Consumo::all();
+        $medidores = Medidor::orderby('idCanton','desc')->get();
 
-        return view('consumo.index', compact('consumos'))
-            ->with('i', (request()->input('page', 1) - 1) * $consumos->perPage());
+        return view('medidor.index')->with('medidores',$medidores);
+    
     }
 
     /**
@@ -31,8 +31,8 @@ class ConsumoController extends Controller
      */
     public function create()
     {
-        $consumo = new Consumo();
-        return view('consumo.create', compact('consumo'));
+        $medidore = new Medidor();
+        return view('medidor.create', compact('medidor'));
     }
 
     /**
@@ -43,12 +43,12 @@ class ConsumoController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Consumo::$rules);
+        request()->validate(Medidor::$rules);
 
-        $consumo = Consumo::create($request->all());
+        $medidore = Medidor::create($request->all());
 
-        return redirect()->route('consumos.index')
-            ->with('success', 'Consumo created successfully.');
+        return redirect()->route('medidor.index')
+            ->with('success', 'Medidor created successfully.');
     }
 
     /**
@@ -59,9 +59,9 @@ class ConsumoController extends Controller
      */
     public function show($id)
     {
-        $consumo = Consumo::find($id);
+        $medidore = Medidor::find($id);
 
-        return view('consumo.show', compact('consumo'));
+        return view('medidor.show', compact('medidore'));
     }
 
     /**
@@ -72,26 +72,26 @@ class ConsumoController extends Controller
      */
     public function edit($id)
     {
-        $consumo = Consumo::find($id);
+        $medidore = Medidor::find($id);
 
-        return view('consumo.edit', compact('consumo'));
+        return view('medidor.edit', compact('medidore'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Consumo $consumo
+     * @param  Medidor $medidore
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Consumo $consumo)
+    public function update(Request $request, Medidor $medidore)
     {
-        request()->validate(Consumo::$rules);
+        request()->validate(Medidor::$rules);
 
-        $consumo->update($request->all());
+        $medidore->update($request->all());
 
-        return redirect()->route('consumos.index')
-            ->with('success', 'Consumo updated successfully');
+        return redirect()->route('medidor.index')
+            ->with('success', 'Medidor updated successfully');
     }
 
     /**
@@ -101,9 +101,9 @@ class ConsumoController extends Controller
      */
     public function destroy($id)
     {
-        $consumo = Consumo::find($id)->delete();
+        $medidore = Medidor::find($id)->delete();
 
-        return redirect()->route('consumos.index')
-            ->with('success', 'Consumo deleted successfully');
+        return redirect()->route('medidor.index')
+            ->with('success', 'Medidor deleted successfully');
     }
 }

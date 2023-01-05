@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('usuario', function (Blueprint $table) {
-            $table->comment('');
-            $table->integer('idUsuario', true);
-            $table->text('correo');
-            $table->text('contraseña');
-            $table->integer('rol')->nullable();
-            $table->string('idPersona', 11)->nullable()->index('UsuarioEmpleado');
+        Schema::table('personas', function (Blueprint $table) {
+            $table->foreign(['idCanton'], 'personaCantond')->references(['idCanton'])->on('canton')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -30,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuario');
+        Schema::table('personas', function (Blueprint $table) {
+            $table->dropForeign('personaCantond');
+        });
     }
 };

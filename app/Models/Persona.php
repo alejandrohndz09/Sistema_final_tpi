@@ -19,13 +19,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $idCanton
  * 
  * @property Canton|null $canton
+ * @property Collection|Medidor[] $medidores
  * @property Collection|Usuario[] $usuarios
  *
  * @package App\Models
  */
 class Persona extends Model
 {
-	protected $table = 'persona';
+	protected $table = 'personas';
 	protected $primaryKey = 'idPersona';
 	public $incrementing = false;
 	public $timestamps = false;
@@ -46,8 +47,18 @@ class Persona extends Model
 		return $this->belongsTo(Canton::class, 'idCanton');
 	}
 
+	public function medidores()
+	{
+		return $this->hasMany(Medidor::class, 'idPersona');
+	}
+
 	public function usuarios()
 	{
 		return $this->hasMany(Usuario::class, 'idPersona');
+	}
+
+	public function toString()
+	{
+		return $this->nombre.' '.$this->apellidos;
 	}
 }

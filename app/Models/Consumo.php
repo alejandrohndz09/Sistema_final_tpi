@@ -1,50 +1,68 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Consumo
+ * 
+ * @property float|null $lectura_anterior
+ * @property float|null $lectura_actual
+ * @property Carbon|null $fecha_a_facturar
+ * @property Carbon|null $desde
+ * @property Carbon|null $hasta
+ * @property float|null $monto
+ * @property string|null $estado
+ * @property Carbon|null $vence
+ * @property int|null $idMedidores
+ * @property float|null $mora
+ * 
+ * @property Medidor|null $medidore
  *
- * @property $lectura_anterior
- * @property $lectura_actual
- * @property $fecha_a_facturar
- * @property $desde
- * @property $hasta
- * @property $monto
- * @property $estado
- * @property $vence
- * @property $idMedidores
- * @property $mora
- *
- * @property Medidore $medidore
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
+ * @package App\Models
  */
 class Consumo extends Model
 {
-    
-    static $rules = [
-    ];
+	protected $table = 'consumo';
+	public $incrementing = false;
+	public $timestamps = false;
 
-    protected $perPage = 20;
+	protected $casts = [
+		'lectura_anterior' => 'float',
+		'lectura_actual' => 'float',
+		'monto' => 'float',
+		'idMedidores' => 'int',
+		'mora' => 'float'
+	];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['lectura_anterior','lectura_actual','fecha_a_facturar','desde','hasta','monto','estado','vence','idMedidores','mora'];
+	protected $dates = [
+		'fecha_a_facturar',
+		'desde',
+		'hasta',
+		'vence'
+	];
 
+	protected $fillable = [
+		'lectura_anterior',
+		'lectura_actual',
+		'fecha_a_facturar',
+		'desde',
+		'hasta',
+		'monto',
+		'estado',
+		'vence',
+		'idMedidores',
+		'mora'
+	];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function medidore()
-    {
-        return $this->hasOne('App\Models\Medidore', 'idMedidores', 'idMedidores');
-    }
-    
-
+	public function medidor()
+	{
+		return $this->belongsTo(Medidor::class, 'idMedidores');
+	}
 }

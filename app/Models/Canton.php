@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $idCanton
  * @property string|null $nombre
  * 
- * @property Collection|Medidore[] $medidores
+ * @property Collection|Medidor[] $medidores
  * @property Collection|Persona[] $personas
  *
  * @package App\Models
@@ -32,7 +32,7 @@ class Canton extends Model
 
 	public function medidores()
 	{
-		return $this->hasMany(Medidore::class, 'idCanton');
+		return $this->hasMany(Medidor::class, 'idCanton');
 	}
 
 	public function personas()

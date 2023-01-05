@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('medidores', function (Blueprint $table) {
+            $table->foreign(['idPersona'], 'medidorPersona')->references(['idPersona'])->on('personas')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign(['idCanton'], 'MedidorCanton')->references(['idCanton'])->on('canton')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreign(['idUsuario'], 'medidorUsuario')->references(['idUsuario'])->on('usuario')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -27,8 +27,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('medidores', function (Blueprint $table) {
+            $table->dropForeign('medidorPersona');
             $table->dropForeign('MedidorCanton');
-            $table->dropForeign('medidorUsuario');
         });
     }
 };
