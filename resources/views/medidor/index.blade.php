@@ -17,12 +17,14 @@ use App\Models\Canton;
                 </ol>
                 <div class="card mb-4">
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             data-bs-whatever="@mdo">
                             <i class="bi bi-plus-circle"></i> Agregar
-                        </button>
-
-                        @include('medidor.form')
+                    </a>
+                        @php
+                            $medidor=new Medidor();
+                        @endphp
+                        @include('medidor.form',$medidor)
                     </div>
                 </div>
                 <div class="card mb-4">
@@ -34,9 +36,9 @@ use App\Models\Canton;
                         <table id="datatablesSimple" class="table">
                             <thead class="table-dark">
                                 <tr>
-                                    
-                                    
-                                    <th class="col-sm-1" >Código</th>
+
+
+                                    <th class="col-sm-1">Código</th>
                                     <th>Ubicación/Sector</th>
                                     <th>Dueño</th>
                                     <th class="col-sm-1"></th>
@@ -55,14 +57,14 @@ use App\Models\Canton;
                                         @php
                                             $cantonActual = $medidor->canton->nombre;
                                         @endphp
-                                    @endif  
+                                    @endif
                                     <tr>
-                                        
+
                                         <th scope="row">{{ $medidor->idMedidores }}</th>
                                         <td>{{ $medidor->referencia }}</td>
-                                        <td>{{$medidor->persona==null?'No asignado':$medidor->persona->toString}}</td>
-                                        <td >
-                                          @include('medidor.dropdown')
+                                        <td>{{ $medidor->persona == null ? 'No asignado' : $medidor->persona->toString }}</td>
+                                        <td>
+                                            @include('medidor.dropdown')
                                         </td>
                                     </tr>
                                 @endforeach
