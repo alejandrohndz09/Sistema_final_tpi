@@ -19,7 +19,7 @@ use App\Models\Canton;
                     <div class="card-body">
                         <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             data-bs-whatever="@mdo">
-                            <i class="bi bi-plus-circle"></i> Agregar
+                            <i class="bi bi-plus-circle"></i> Ag regar
                     </a>
                         @php
                             $medidor=new Medidor();
