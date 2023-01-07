@@ -20,11 +20,11 @@ use App\Models\Canton;
                         <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             data-bs-whatever="@mdo">
                             <i class="bi bi-plus-circle"></i> Ag regar
-                    </a>
+                        </a>
                         @php
-                            $medidor=new Medidor();
+                            $medidor = new Medidor();
                         @endphp
-                        @include('medidor.form',$medidor)
+                        @include('medidor.form', $medidor)
                     </div>
                 </div>
                 <div class="card mb-4">
@@ -62,7 +62,8 @@ use App\Models\Canton;
 
                                         <th scope="row">{{ $medidor->idMedidores }}</th>
                                         <td>{{ $medidor->referencia }}</td>
-                                        <td>{{ $medidor->persona == null ? 'No asignado' : $medidor->persona->toString }}</td>
+                                        <td>{{ $medidor->persona == null ? 'No asignado' : $medidor->persona->toString }}
+                                        </td>
                                         <td>
                                             @include('medidor.dropdown')
                                         </td>
