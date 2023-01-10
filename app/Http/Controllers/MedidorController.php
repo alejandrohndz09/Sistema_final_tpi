@@ -54,11 +54,7 @@ class MedidorController extends Controller
             $type='success';
             $medidores = Medidor::orderby('idCanton','desc')->get();
             return view('medidor.index')->with('medidores',$medidores)->with('message', $message)->with('type', $type);
-        
 
-        
-
-        
     }
 
     /**

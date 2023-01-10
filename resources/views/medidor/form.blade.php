@@ -75,7 +75,7 @@ use App\Models\Canton;
 
 
                     <a href="/medidor" class="btn btn-secondary" tabindex="5">Cancelar</a>
-                    <button type="button" onclick="validar()" class="btn btn-success" tabindex="4">Guardar</button>
+                    <button type="button" id="envio" class="btn btn-success" tabindex="4">Guardar</button>
                 </form>
             </div>
         </div>
@@ -88,7 +88,7 @@ use App\Models\Canton;
 <script src="{{ asset('js/select2.min.js')}}"></script> --}}
 <script src="{{ url('https://code.jquery.com/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ url('https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js') }}"></script>
-<script src="{{url('https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.min.js')}}"></script>
+<script src="{{ url('https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.min.js') }}"></script>
 <script>
     // Mostrar alerta cuando se despliegue el select
 
@@ -119,10 +119,9 @@ use App\Models\Canton;
 </script>
 
 <script>
-    
-    function validar() {
-        if (document.getElementById('persona').value > -1 &&
-            document.getElementById('apellido').value > -1) {
+    $('#envio').click(function() {
+        if (document.getElementById('persona').value != '-1' &&
+            document.getElementById('canton').value != '-1') {
             document.form.submit();
         } else {
             Toast.fire({
@@ -130,5 +129,13 @@ use App\Models\Canton;
                 title: 'La selección de Persona y Cantón son necesarias'
             });
         }
-    }
+    })
 </script>
+@if (Session::has('type') && Session::has('message'))
+    <script>
+        Toast.fire({
+            icon: "{{$type }}",
+            title: "{{ $message}}"
+        }); 
+    </script>
+@endif
