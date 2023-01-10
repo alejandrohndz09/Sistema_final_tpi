@@ -31,8 +31,8 @@ class MedidorController extends Controller
      */
     public function create()
     {
-        $medidore = new Medidor();
-        return view('medidor.create', compact('medidor'));
+        $medidor = new Medidor();
+        return view('medidor.form')->with('medidor', $medidor);   
     }
 
     /**
@@ -43,12 +43,22 @@ class MedidorController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Medidor::$rules);
+        
+                Medidor::create([
+                'idPersona' => $request->input('persona'),
+                'idCanton' => $request->input('canton'),
+                'ruta' => $request->input('ruta'),
+                'referencia' => $request->input('referencia')
+            ]);
+            $message='Registrado con éxito';
+            $type='success';
+            $medidores = Medidor::orderby('idCanton','desc')->get();
+            return view('medidor.index')->with('medidores',$medidores)->with('message', $message)->with('type', $type);
+        
 
-        $medidore = Medidor::create($request->all());
+        
 
-        return redirect()->route('medidor.index')
-            ->with('success', 'Medidor created successfully.');
+        
     }
 
     /**

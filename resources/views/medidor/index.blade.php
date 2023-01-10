@@ -62,7 +62,7 @@ use App\Models\Canton;
 
                                         <th scope="row">{{ $medidor->idMedidores }}</th>
                                         <td>{{ $medidor->referencia }}</td>
-                                        <td>{{ $medidor->persona == null ? 'No asignado' : $medidor->persona->toString }}
+                                        <td>{{ $medidor->persona == null ? 'No asignado' : $medidor->persona }}
                                         </td>
                                         <td>
                                             @include('medidor.dropdown')

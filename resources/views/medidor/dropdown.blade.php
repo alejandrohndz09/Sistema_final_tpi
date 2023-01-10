@@ -11,7 +11,7 @@
             </a>
         </li>
         <li>
-            {{-- <form action="{{ route('medidor.destroy', $medidor->idMedidor) }}" method="POST"> --}}
+            {{-- <form action="{{ route('medidor.destroy', $medidor->idMedidores) }}" method="POST"> --}}
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="dropdown-item">
