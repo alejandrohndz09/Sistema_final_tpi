@@ -20,7 +20,7 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Cliente Poseedor</label>
                         <select class="form-select" name="persona" id="persona" required tabindex="4">
-                            @if ($medidor->idMedidor == null)
+                            @if ($medidor->idMedidor == null) 
 
                                 <option value="{{ $medidor->idPersona }}" selected>Seleccione</option>
 
