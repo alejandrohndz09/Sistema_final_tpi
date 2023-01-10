@@ -1,3 +1,10 @@
+<?php use App\Models\Persona;
+?>
+ <link
+ href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css"
+ rel="stylesheet"
+/>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -13,16 +20,23 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Cliente Poseedor</label>
                         <select class="form-select" name="persona" id="persona" required tabindex="4">
+                            @if ($medidor->idMedidor == null)
 
-                          <option value="{{ $medidor->idPersona }}"selected>
-                                {{ Persona::find($medidor->idPersona)->nombre }}</option>
-                            @foreach ($personas as $t)
-                                <?php if($t->idPersona!=$medidor->idPersona){?>
-                                <option value="{{ $t->idPersona }}">{{ $t->nombre }}</option>
-                                <?php }?>
-                            @endforeach
+                                <option value="{{ $medidor->idPersona }}" selected>Seleccione</option>
+
+                                @foreach (Persona::all() as $t)
+                                    <option value="{{ $t->idPersona }}">{{ $t }}</option>
+                                @endforeach
+                            @else
+                                <option value="{{ $medidor->idPersona }}"selected>
+                                    {{ Persona::find($medidor->idPersona)->nombre }}</option>
+                                @foreach ($personas as $t)
+                                    <?php if($t->idPersona!=$medidor->idPersona){?>
+                                    <option value="{{ $t->idPersona }}">{{ $t->nombre }}</option>
+                                    <?php }?>
+                                @endforeach
+                            @endif
                         </select>
-
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">r</label>
@@ -54,3 +68,15 @@
         </div>
     </div>
 </div>
+
+  <!-- Archivos JavaScript de Select2 -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#persona').select2({
+        theme: 'bootstrap',
+        placeholder: 'Select a state',
+      });
+    });
+  </script>

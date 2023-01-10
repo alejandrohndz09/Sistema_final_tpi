@@ -57,8 +57,8 @@ class Persona extends Model
 		return $this->hasMany(Usuario::class, 'idPersona');
 	}
 
-	public function toString()
+	public function __toString()
 	{
-		return $this->nombre.' '.$this->apellidos;
+		return $this->idPersona.' - '.$this->nombre.' '.$this->apellidos;
 	}
 }
