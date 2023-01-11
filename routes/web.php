@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 | Web Routes
 
 
-amo a flavio y el es mi novio 
+amo a flavio y el es mi novio  y kevin la amante
 |--------------------------------------------------------------------------
 |
 | He
