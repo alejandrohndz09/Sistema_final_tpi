@@ -34,7 +34,7 @@ use App\Models\Canton;
                                 @foreach (Persona::all() as $t)
                                     <option value="{{ $t->idPersona }}">{{ $t }}</option>
                                 @endforeach
-                            @else
+                            @else 
                                 <option value="{{ $medidor->idPersona }}"selected>
                                     {{ $medidor->persona }}</option>
                                 @foreach (Persona::all() as $t)

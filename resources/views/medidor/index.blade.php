@@ -48,21 +48,21 @@ use App\Models\Canton;
                                 @php
                                     $cantonActual = '';
                                 @endphp
-                                @foreach ($medidores as $medidor)
-                                    @if ($medidor->canton->nombre != $cantonActual)
+                                @foreach ($medidores as $m)
+                                    @if ($m->canton->nombre != $cantonActual)
                                         <tr scope="col" class="table-secondary">
-                                            <th colspan="5" style="">CANTÓN {{ $medidor->canton->nombre }}
+                                            <th colspan="5" style="">CANTÓN {{ $m->canton->nombre }}
                                             </th>
                                         </tr>
                                         @php
-                                            $cantonActual = $medidor->canton->nombre;
+                                            $cantonActual = $m->canton->nombre;
                                         @endphp
                                     @endif
                                     <tr>
 
-                                        <th scope="row">{{ $medidor->idMedidores }}</th>
-                                        <td>{{ $medidor->referencia }}</td>
-                                        <td>{{ $medidor->persona == null ? 'No asignado' : $medidor->persona }}
+                                        <th scope="row">{{ $m->idMedidores }}</th>
+                                        <td>{{ $m->referencia }}</td>
+                                        <td>{{ $m->persona == null ? 'No asignado' : $m->persona }}
                                         </td>
                                         <td>
                                             @include('medidor.dropdown')
@@ -76,5 +76,5 @@ use App\Models\Canton;
             </div>
         </main>
     </div>
-    
+   
 @endsection

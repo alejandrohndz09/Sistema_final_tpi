@@ -49,11 +49,10 @@ class MedidorController extends Controller
                 'idCanton' => $request->input('canton'),
                 'ruta' => $request->input('ruta'),
                 'referencia' => $request->input('referencia')
-            ]);
-            $message='Registrado con éxito';
-            $type='success';
+            ]);            
             $medidores = Medidor::orderby('idCanton','desc')->get();
-            return view('medidor.index')->with('medidores',$medidores)->with('message', $message)->with('type', $type);
+            session()->flash('alert', ['type' => 'success', 'message' => 'Acción realizada con éxito']);
+            return  view('medidor.index')->with('medidores',$medidores);
 
     }
 
@@ -67,7 +66,7 @@ class MedidorController extends Controller
     {
         $medidore = Medidor::find($id);
 
-        return view('medidor.show', compact('medidore'));
+        session()->flash('medidor',$medidor);
     }
 
     /**
@@ -78,9 +77,9 @@ class MedidorController extends Controller
      */
     public function edit($id)
     {
-        $medidore = Medidor::find($id);
-
-        return view('medidor.edit', compact('medidore'));
+        $medidor = Medidor::find($id);
+        
+        session()->flash('medidor',$medidor);
     }
 
     /**
