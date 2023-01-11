@@ -134,8 +134,10 @@ use App\Models\Canton;
 @if (Session::has('type') && Session::has('message'))
     <script>
         Toast.fire({
-            icon: "{{$type }}",
-            title: "{{ $message}}"
-        }); 
+            icon: "{{ Session::get('type') }}",
+            title: "{{ Session::get('message') }}",
+        }).then(() => {
+            @session()->forget('message', 'type']);
+        });  
     </script>
 @endif
