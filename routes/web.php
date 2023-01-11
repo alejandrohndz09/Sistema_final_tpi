@@ -17,6 +17,11 @@ amo a flavio y el es mi novio
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 });
+
+Route::get('/', function () {
+    return view('login');
+});
+
 Route::get('/', function () {
     return view('medidor.g');
 });
