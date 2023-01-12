@@ -22,7 +22,7 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::get('medidor/{id}/edit', 'App\Http\Controllers\MedidorController@edit')->name('medidor.form');
+Route::get('show-modal', 'App\Http\Controllers\MedidorController@showModal')->name('show-modal');
 
 Route::resource('consumo', 'App\Http\Controllers\ConsumoController');
 Route::resource('medidor', 'App\Http\Controllers\MedidorController');

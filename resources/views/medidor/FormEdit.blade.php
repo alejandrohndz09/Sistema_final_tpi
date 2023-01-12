@@ -1,81 +1,64 @@
 <?php
 use App\Models\Persona;
 use App\Models\Canton;
+use App\Models\Medidor;
 ?>
-@if (session()->has('medidor'))
-    @php
-        $medidor = session()->get('medidor');
-        
-    @endphp
-@endif
+
+@php
+    $medidor = new Medidor();
+    $medidor = session('medidor');
+@endphp
+
 <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}" type="text/css">
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">{{$medidor->ruta}}</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Registro</h1>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/medidor/{{ $medidor->idPersona }}" name="form" method="POST">
+                <form action="/medidor" id="" name="form" method="POST">
                     @csrf
-                    @if ($medidor->idMedidores != null)
-                        @method('PUT')
-                    @endif
+
+                    @method('PUT')
+
                     <div class="mb-3">
                         <label for="" class="form-label">Cliente Poseedor</label>
                         <select class="form-select" name="persona" tabindex="1" id="persona" required>
-                            @if ($medidor->idMedidor == null)
-
-                                <option value="-1" selected>Seleccione</option>
-
-                                @foreach (Persona::all() as $t)
-                                    <option value="{{ $t->idPersona }}">{{ $t }}</option>
-                                @endforeach
-                            @else 
-                                <option value="{{ $medidor->idPersona }}"selected>
-                                    {{ $medidor->persona }}</option>
-                                @foreach (Persona::all() as $t)
-                                    <?php if($t->idPersona!=$medidor->idPersona){?>
-                                    <option value="{{ $t->idPersona }}">{{ $t }}</option>
-                                    <?php }?>
-                                @endforeach
-                            @endif
+                            {{-- <option value="{{ $medidor->idPersona }}"selected>
+                                {{ $medidor->persona }}</option> --}}
+                            @foreach (Persona::all() as $t)
+                                
+                                <option value="{{ $t->idPersona }}">{{ $t }}</option>
+                                
+                            @endforeach
                         </select>
 
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Cantón</label>
                         <select class="form-select" name="canton" tabindex="1" id="canton" required>
-                            @if ($medidor->idCanton == null)
-
-                                <option value="-1" selected>Seleccione</option>
-
-                                @foreach (Canton::all() as $c)
-                                    <option value="{{ $c->idCanton }}">{{ $c->nombre }}</option>
-                                @endforeach
-                            @else
-                                <option value="{{ $medidor->idCanton }}"selected>
-                                    {{ $medidor->canton->nombre }}</option>
-                                @foreach (Canton::all() as $c)
-                                    <?php if($c->idCanton!=$medidor->idCanton){?>
-                                    <option value="{{ $t->idCanton }}">{{ $t->nombre }}</option>
-                                    <?php }?>
-                                @endforeach
-                            @endif
+                            {{-- <option value="{{ $medidor->idCanton }}"selected>
+                                {{ $medidor->canton->nombre }}</option> --}}
+                            @foreach (Canton::all() as $c)
+                               
+                                <option value="{{ $t->idCanton }}">{{ $t->nombre }}</option>
+                                
+                            @endforeach
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="" class="form-label">Ruta</label>
-                        <input type="text" id="ruta" name="ruta" value="{{ $medidor->ruta }}"
+                        <input type="text" id="ruta" name="ruta" value=""
                             class="form-control" tabindex="1">
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Referencia</label>
-                        <input type="text" id="referencia" name="referencia" value="{{ $medidor->referencia }}"
+                        <input type="text" id="referencia" name="referencia" value=""
                             class="form-control" tabindex="3">
                     </div>
 
@@ -97,29 +80,21 @@ use App\Models\Canton;
 <script src="{{ url('https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.min.js') }}"></script>
 <script>
     var selectOriginal = $("#persona").html();
-    $('#exampleModal').on('shown.bs.modal', function() {
+    $('#exampleModalEdit').on('shown.bs.modal', function() {
         $(this).find('form')[0].reset();
+        let botonPresionado = $(event.relatedTarget);
+        console.log(botonPresionado);
         $('.form-select').select2({
-            dropdownParent: $('#exampleModal'),
+            dropdownParent: $('#exampleModalEdit'),
             placeholder: 'Seleccione',
 
         });
     });
 
-    $('#exampleModal').on('hidden.bs.modal', function() {
-        $('.form-select').select2('destroy');
-    });
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 5000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    });
+    // $('#exampleModalEdit').on('hidden.bs.modal', function() {
+    //     $('.form-select').select2('destroy');
+    // });
+    
 </script>
 
 <script>

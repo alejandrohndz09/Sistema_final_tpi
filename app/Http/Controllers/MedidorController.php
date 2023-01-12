@@ -82,6 +82,10 @@ class MedidorController extends Controller
         session()->flash('medidor',$medidor);
     }
 
+    public function showModal()
+    {
+        return view('medidor.FormEdit');
+    }
     /**
      * Update the specified resource in storage.
      *

@@ -21,10 +21,7 @@ use App\Models\Canton;
                             data-bs-whatever="@mdo">
                             <i class="bi bi-plus-circle"></i> Agregar
                         </a>
-                        @php
-                            $medidor = new Medidor();
-                        @endphp
-                        @include('medidor.form', $medidor)
+                        @include('medidor.FormCreate')
                     </div>
                 </div>
                 <div class="card mb-4">
@@ -70,11 +67,14 @@ use App\Models\Canton;
                                     </tr>
                                 @endforeach
                             </tbody>
+                            
                         </table>
+                        
+
                     </div>
                 </div>
             </div>
         </main>
     </div>
-   
+ 
 @endsection
