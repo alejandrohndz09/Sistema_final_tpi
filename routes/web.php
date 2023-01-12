@@ -22,6 +22,10 @@ Route::get('/', function () {
     return view('login');
 });
 
+Route::post('login', function(){
+    return request('usuario');
+});
+
 Route::get('show-modal', 'App\Http\Controllers\MedidorController@showModal')->name('show-modal');
 
 Route::resource('consumo', 'App\Http\Controllers\ConsumoController');
