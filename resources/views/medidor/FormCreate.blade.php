@@ -4,11 +4,11 @@ use App\Models\Canton;
 ?>
 <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}" type="text/css">
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Crear Registro</h1>
+                <h1 class="modal-title fs-5" id="createModalLabel">Crear Registro</h1>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -37,13 +37,11 @@ use App\Models\Canton;
 
                     <div class="mb-3">
                         <label for="" class="form-label">Ruta</label>
-                        <input type="text" id="ruta" name="ruta"
-                            class="form-control" tabindex="1">
+                        <input type="text" id="ruta" name="ruta" class="form-control" tabindex="1">
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Referencia</label>
-                        <input type="text" id="referencia" name="referencia"
-                            class="form-control" tabindex="3">
+                        <input type="text" id="referencia" name="referencia" class="form-control" tabindex="3">
                     </div>
 
 
@@ -61,19 +59,24 @@ use App\Models\Canton;
 <script src="{{ url('https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js') }}"></script>
 <script src="{{ url('https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.min.js') }}"></script>
 <script>
-    var selectOriginal = $("#persona").html();
-    $('#exampleModal').on('shown.bs.modal', function() {
-        $(this).find('form')[0].reset();
-        $('.form-select').select2({
-            dropdownParent: $('#exampleModal'),
-            placeholder: 'Seleccione', 
-            
+    let selects = ['#canton', '#persona'];
 
-        });
+
+    $('#createModal').on('shown.bs.modal', function() {
+        $(this).find('form')[0].reset();
+        for (var sl of selects) {
+            $(sl).select2({
+                dropdownParent: $('#createModal'),
+                placeholder: 'Seleccione',
+            });
+        }
     });
 
-    $('#exampleModal').on('hidden.bs.modal', function() {
-        $('.form-select').select2('destroy');
+    $('#createModal').on('hidden.bs.modal', function() {
+        for (var sl of selects) {
+            $(sl).select2('destroy');
+        }
+        
     });
     const Toast = Swal.mixin({
         toast: true,

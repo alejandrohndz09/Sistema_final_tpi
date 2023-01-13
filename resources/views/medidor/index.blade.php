@@ -23,11 +23,11 @@ use App\Models\Canton;
                             <i class="fas fa-table me-1"></i>
                             Registros
                         </div>
-                        <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"
                             data-bs-whatever="@mdo">
                             <i class="fas fa-add"></i>Agregar
                         </a>
-                        @include('medidor.FormCreate')
+                        
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple" class="table">
@@ -69,7 +69,10 @@ use App\Models\Canton;
                             </tbody>
 
                         </table>
-
+                        @include('medidor.FormCreate')
+                        @include('medidor.FormEdit')
+                        
+                        
 
                     </div>
                 </div>

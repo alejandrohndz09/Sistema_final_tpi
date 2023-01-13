@@ -11,7 +11,7 @@ use App\Models\Medidor;
 
 <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}" type="text/css">
 
-<div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,20 +20,18 @@ use App\Models\Medidor;
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/medidor" id="" name="form" method="POST">
+                <form action="/medidor" id="edit" name="form" method="POST">
                     @csrf
 
                     @method('PUT')
 
                     <div class="mb-3">
                         <label for="" class="form-label">Cliente Poseedor</label>
-                        <select class="form-select" name="persona" tabindex="1" id="persona" required>
+                        <select class="form-select" name="persona" tabindex="1" id="persona-e" required>
                             {{-- <option value="{{ $medidor->idPersona }}"selected>
                                 {{ $medidor->persona }}</option> --}}
                             @foreach (Persona::all() as $t)
-                                
                                 <option value="{{ $t->idPersona }}">{{ $t }}</option>
-                                
                             @endforeach
                         </select>
 
@@ -44,22 +42,20 @@ use App\Models\Medidor;
                             {{-- <option value="{{ $medidor->idCanton }}"selected>
                                 {{ $medidor->canton->nombre }}</option> --}}
                             @foreach (Canton::all() as $c)
-                               
-                                <option value="{{ $t->idCanton }}">{{ $t->nombre }}</option>
-                                
+                                <option value="{{ $c->idCanton }}">{{ $c->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="" class="form-label">Ruta</label>
-                        <input type="text" id="ruta" name="ruta" value=""
-                            class="form-control" tabindex="1">
+                        <input type="text" id="ruta" name="ruta" value="" class="form-control"
+                            tabindex="1">
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Referencia</label>
-                        <input type="text" id="referencia" name="referencia" value=""
-                            class="form-control" tabindex="3">
+                        <input type="text" id="referencia" name="referencia" value="" class="form-control"
+                            tabindex="3">
                     </div>
 
 
@@ -71,30 +67,41 @@ use App\Models\Medidor;
     </div>
 </div>
 
-{{-- <script src="{{ asset('js/jquery.js') }}"></script>
 
-<!-- Archivos JavaScript de Select2 -->
-<script src="{{ asset('js/select2.min.js')}}"></script> --}}
-<script src="{{ url('https://code.jquery.com/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ url('https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js') }}"></script>
-<script src="{{ url('https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.min.js') }}"></script>
 <script>
-    var selectOriginal = $("#persona").html();
-    $('#exampleModalEdit').on('shown.bs.modal', function() {
-        $(this).find('form')[0].reset();
-        let botonPresionado = $(event.relatedTarget);
-        console.log(botonPresionado);
+    //Recuperar inputs del formulario
+    let modalEditar = $('#editModal');
+    let urlEditar = "{{ url('/medidor') }}";
+    let formEditarVideo = document.querySelector('#edit');
+    let ePersona = document.querySelector('#persona');
+    let eCanton = document.querySelector('#canton');
+    let eRuta = document.querySelector('#ruta');
+    let eReferencia = document.querySelector('#referencia');
+</script>
+
+
+<script>
+    let obj=null;
+    $('body').on('click', '#editarMedidor', function() {
+        var customer_id = $(this).data('id');
+        $.get('medidor/' + customer_id + '/edit', function(data) {
+            obj = data;
+
+            // $('#editModal').modal('show');
+        });
+    });
+    $('#editModal').on('shown.bs.modal', function() { //Cuando el modal se muestreee
+        console.log(obj);
         $('.form-select').select2({
-            dropdownParent: $('#exampleModalEdit'),
+            dropdownParent: $('#editModal'),
             placeholder: 'Seleccione',
 
         });
+        document.getElementById("persona-e").value=obj.idPersona;
+        $("#edit select[name='canton']").val(obj.idcanton);
+        $("#edit input[name='ruta']").val(obj.ruta);
+        $("#edit input[name='referencia']").val(obj.referencia);
     });
-
-    // $('#exampleModalEdit').on('hidden.bs.modal', function() {
-    //     $('.form-select').select2('destroy');
-    // });
-    
 </script>
 
 <script>
@@ -110,6 +117,7 @@ use App\Models\Medidor;
         }
     })
 </script>
+
 
 @if (session()->has('alert'))
     <script>

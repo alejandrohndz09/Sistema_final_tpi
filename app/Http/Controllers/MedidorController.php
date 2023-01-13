@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Medidor;
 use Illuminate\Http\Request;
-
+use Redirect,Response;
 /**
  * Class MedidorController
  * @package App\Http\Controllers
@@ -78,8 +78,7 @@ class MedidorController extends Controller
     public function edit($id)
     {
         $medidor = Medidor::find($id);
-        
-        session()->flash('medidor',$medidor);
+        return Response::json($medidor);
     }
 
     public function showModal()
