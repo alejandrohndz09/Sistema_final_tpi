@@ -66,7 +66,8 @@ use App\Models\Canton;
         $(this).find('form')[0].reset();
         $('.form-select').select2({
             dropdownParent: $('#exampleModal'),
-            placeholder: 'Seleccione',
+            placeholder: 'Seleccione', 
+            
 
         });
     });
