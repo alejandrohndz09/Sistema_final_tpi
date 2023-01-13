@@ -17,21 +17,21 @@ class LoginController extends Controller
     public function show(){
         return view('layouts.login');
     }
-    
-   public function login(Request $request, Redirector $redirect)
-    {
-        $user = Usuario::where('correo', $request->correo)->first();
 
-        if (Hash::check($request->contraseña, $user->contraseña)) {
-            Auth::login($user);
-            $request->session()->regenerate();
+   public function login(LoginRequest $request){
+    $credenciales = $request->getCredenciales();
 
-            return redirect('/dashboard');
-        }
+    if(!Auth::validate(($credenciales))){
+        return redirect('/');
     }
+    $user = Auth::getProvider()->retrieveByCredentials($credenciales);
 
-    public function authenticated(Request $request, $usuario)
-    {
-        return redirect('/dashboard');
-    }
+    Auth::login($user);
+
+    return $this->authenticated($request,$user);
+   }
+
+   public function authenticated(Request $request,$user){
+    return redirect('/dashboard');
+   }
 }
