@@ -32,6 +32,6 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $usuario)
     {
-        return redirect('/dashboard');
+        return view('dashboard.dashboard');
     }
 }
