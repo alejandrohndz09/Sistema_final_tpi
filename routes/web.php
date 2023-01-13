@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,16 +16,12 @@ amo a flavio y el es mi novio  y kevin la amante
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard.dashboard');
+    return view('dashboard.dashboard'); 
 });
 
-Route::get('/', function () {
-    return view('login');
-});
 
-Route::post('login', function(){
-    return request('usuario');
-});
+Route::get('/',[LoginController::class,'show'])->name('login');
+Route::post('/',[LoginController::class,'login']);
 
 Route::get('show-modal', 'App\Http\Controllers\MedidorController@showModal')->name('show-modal');
 
