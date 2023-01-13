@@ -6,7 +6,7 @@
 
 
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <li><a href="#" id="mod" class="dropdown-item btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit"
+        <li><a href="#" id="mod{{$m->idMedidores}}" class="dropdown-item btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit"
                 data-object="@json($m)">
                 <i class="fas fa-pencil"></i>&emsp;Editar
             </a>

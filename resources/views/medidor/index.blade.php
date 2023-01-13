@@ -7,27 +7,27 @@ use App\Models\Canton;
 @extends('layouts.master')
 
 @section('content')
-    <div id="layoutSidenav_content">
+    <div id="layoutSidenav_content" >
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Medidores</h1>
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Medidores</li>
-                </ol>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            data-bs-whatever="@mdo">
-                            <i class="bi bi-plus-circle"></i> Agregar
-                        </a>
-                        @include('medidor.FormCreate')
+                <div class="card shadow-lg align-self-center my-4 ">
+                    <div class="my-3 mx-2 fs-1 fw-semibold">
+                        <i class="fas fa-tachometer-alt" style="color: #3196cf"></i>&nbsp;Medidores
                     </div>
                 </div>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
-                        Registros
+
+
+                <div class="card mb-4 shadow-lg">
+                    <div class="col-12 d-flex justify-content-between card-header ">
+                        <div class="fs-5 text-center align-self-center">
+                            <i class="fas fa-table me-1"></i>
+                            Registros
+                        </div>
+                        <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-bs-whatever="@mdo">
+                            <i class="fas fa-add"></i>Agregar
+                        </a>
+                        @include('medidor.FormCreate')
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple" class="table">
@@ -67,14 +67,13 @@ use App\Models\Canton;
                                     </tr>
                                 @endforeach
                             </tbody>
-                            
+
                         </table>
-                        
+
 
                     </div>
                 </div>
             </div>
         </main>
     </div>
- 
 @endsection
