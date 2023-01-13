@@ -23,12 +23,12 @@
                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Ingresar a Mi Cuenta</h5>
       
                         <div class="form-outline mb-4">
-                          <input type="text" class="form-control form-control-lg" id="correo" name="correo"/>
+                          <input type="text" class="form-control form-cignin-text" id="correo" name="correo"/>
                           <label class="form-label" for="form2Example17">Usuario</label>
                         </div>
       
                         <div class="form-outline mb-4">
-                          <input type="password" class="form-control form-control-lg" id="contraseña" name="contraseña" spellcheck="false" autocorrect="off" autocapitalize="off"/>
+                          <input type="password" class="form-control fform-signin-pass" id="contraseña" name="contraseña" spellcheck="false" autocorrect="off" autocapitalize="off"/>
                           <label for="form2Example27">Contraseña</label>
                         </div>
                         <div class="pt-1 mb-5">
