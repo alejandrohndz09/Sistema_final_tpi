@@ -22,7 +22,7 @@ class LoginController extends Controller
     $credenciales = $request->getCredenciales();
 
     if(!Auth::validate(($credenciales))){
-        return redirect('/');
+        return redirect('/dashboard');
     }
     $user = Auth::getProvider()->retrieveByCredentials($credenciales);
 
