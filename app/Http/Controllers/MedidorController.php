@@ -18,7 +18,7 @@ class MedidorController extends Controller
      */
     public function index()
     {
-        $medidores = Medidor::orderby('idCanton','desc')->get();
+        $medidores = Medidor::where('idCanton',8)->orderby('idCanton','desc')->get();
 
         return view('medidor.index')->with('medidores',$medidores);
     
@@ -50,11 +50,20 @@ class MedidorController extends Controller
                 'ruta' => $request->input('ruta'),
                 'referencia' => $request->input('referencia')
             ]);            
-            $medidores = Medidor::orderby('idCanton','desc')->get();
-            session()->flash('alert', ['type' => 'success', 'message' => 'Acción realizada con éxito']);
+            $medidores = Medidor::where('idCanton',8)->orderby('idCanton','desc')->get();
+            
+            $alert = array(
+                'type' => 'success',
+                'message' =>'El registro se ha guardado exitosamente'
+            );
+            
+            session()->flash('alert',$alert);
+            
             return  view('medidor.index')->with('medidores',$medidores);
 
     }
+
+
 
     /**
      * Display the specified resource.
@@ -81,10 +90,7 @@ class MedidorController extends Controller
         return Response::json($medidor);
     }
 
-    public function showModal()
-    {
-        return view('medidor.FormEdit');
-    }
+   
     /**
      * Update the specified resource in storage.
      *
@@ -92,14 +98,24 @@ class MedidorController extends Controller
      * @param  Medidor $medidore
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Medidor $medidore)
+    public function update(Request $request)
     {
-        request()->validate(Medidor::$rules);
-
-        $medidore->update($request->all());
-
-        return redirect()->route('medidor.index')
-            ->with('success', 'Medidor updated successfully');
+        $medidor = Medidor::find( $request->get('id-e'));
+        $medidor->idPersona = $request->get('persona-e');
+        $medidor->idCanton = $request->get('canton-e');
+        $medidor->ruta = $request->get('ruta-e');
+        $medidor->referencia = $request->get('referencia-e');
+        $medidor->save();
+        $medidores = Medidor::where('idCanton',8)->orderby('idCanton','desc')->get();
+            
+        $alert = array(
+            'type' => 'success',
+            'message' =>'El registro se ha actualizado exitosamente'
+        );
+        
+        session()->flash('alert',$alert);
+        
+        return  redirect('/medidor');
     }
 
     /**
@@ -110,8 +126,12 @@ class MedidorController extends Controller
     public function destroy($id)
     {
         $medidore = Medidor::find($id)->delete();
-
-        return redirect()->route('medidor.index')
-            ->with('success', 'Medidor deleted successfully');
+        $alert = array(
+            'type' => 'success',
+            'message' =>'El registro se ha eliminado exitosamente'
+        );
+        
+        session()->flash('alert',$alert);
+        return redirect()->route('medidor.index');;
     }
 }

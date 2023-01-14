@@ -15,19 +15,17 @@ use App\Models\Medidor;
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Registro</h1>
+                <h1 class="modal-title fs-5" id="editModalLabel">Editar Registro</h1>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/medidor" id="edit" name="form" method="POST">
+                <form action="" id="form-edit" name="form" method="POST">
                     @csrf
-
                     @method('PUT')
-
                     <div class="mb-3">
                         <label for="" class="form-label">Cliente Poseedor</label>
-                        <select class="form-select" name="persona" tabindex="1" id="persona-e" required>
+                        <select class="form-select" name="persona-e" tabindex="1" id="persona-e" required>
                             {{-- <option value="{{ $medidor->idPersona }}"selected>
                                 {{ $medidor->persona }}</option> --}}
                             @foreach (Persona::all() as $t)
@@ -38,7 +36,7 @@ use App\Models\Medidor;
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Cantón</label>
-                        <select class="form-select" name="canton" tabindex="1" id="canton" required>
+                        <select class="form-select" name="canton-e" tabindex="1" id="canton-e" required>
                             {{-- <option value="{{ $medidor->idCanton }}"selected>
                                 {{ $medidor->canton->nombre }}</option> --}}
                             @foreach (Canton::all() as $c)
@@ -46,15 +44,16 @@ use App\Models\Medidor;
                             @endforeach
                         </select>
                     </div>
-
+                    <input type="hidden" id="id-e" name="id-e" value="" class="form-control"
+                        tabindex="1">
                     <div class="mb-3">
                         <label for="" class="form-label">Ruta</label>
-                        <input type="text" id="ruta" name="ruta" value="" class="form-control"
+                        <input type="text" id="ruta-e" name="ruta-e" value="" class="form-control"
                             tabindex="1">
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Referencia</label>
-                        <input type="text" id="referencia" name="referencia" value="" class="form-control"
+                        <input type="text" id="referencia-e" name="referencia-e" value="" class="form-control"
                             tabindex="3">
                     </div>
 
@@ -68,47 +67,43 @@ use App\Models\Medidor;
 </div>
 
 
-<script>
-    //Recuperar inputs del formulario
-    let modalEditar = $('#editModal');
-    let urlEditar = "{{ url('/medidor') }}";
-    let formEditarVideo = document.querySelector('#edit');
-    let ePersona = document.querySelector('#persona');
-    let eCanton = document.querySelector('#canton');
-    let eRuta = document.querySelector('#ruta');
-    let eReferencia = document.querySelector('#referencia');
-</script>
 
 
 <script>
-    let obj=null;
+    let obj = null;
     $('body').on('click', '#editarMedidor', function() {
         var customer_id = $(this).data('id');
         $.get('medidor/' + customer_id + '/edit', function(data) {
             obj = data;
+            document.getElementById("editModalLabel").innerHTML = "Editar Registro No." + obj
+                .idMedidores;
+            document.getElementById("form-edit").setAttribute("action", "/medidor/update");
+            $("#form-edit input[name='id-e']").val(obj.idMedidores);
+            document.getElementById("persona-e").value = obj.idPersona;
+            document.getElementById("canton-e").value = obj.idCanton;
 
-            // $('#editModal').modal('show');
+            $("#form-edit input[name='ruta-e']").val(obj.ruta);
+            $("#form-edit input[name='referencia-e']").val(obj.referencia);
+
+            $('.form-select').select2({
+                dropdownParent: $('#editModal'),
+                placeholder: 'Seleccione',
+
+            });
         });
     });
     $('#editModal').on('shown.bs.modal', function() { //Cuando el modal se muestreee
-        console.log(obj);
-        $('.form-select').select2({
-            dropdownParent: $('#editModal'),
-            placeholder: 'Seleccione',
 
-        });
-        document.getElementById("persona-e").value=obj.idPersona;
-        $("#edit select[name='canton']").val(obj.idcanton);
-        $("#edit input[name='ruta']").val(obj.ruta);
-        $("#edit input[name='referencia']").val(obj.referencia);
+
     });
 </script>
 
 <script>
     $('#envio').click(function() {
-        if (document.getElementById('persona').value != '-1' &&
-            document.getElementById('canton').value != '-1') {
-            document.form.submit();
+        if (document.getElementById('persona-e').value != -1 &&
+            document.getElementById('canton-e').value != -1) {
+            document.getElementById('form-edit').submit();
+            $("#form-edit")[0].reset();
         } else {
             Toast.fire({
                 icon: 'error',
@@ -116,6 +111,23 @@ use App\Models\Medidor;
             });
         }
     })
+
+    $("#form-edit").submit(function(e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        $.ajax({
+            url: "{{ url('/medidor/') }}",
+            type: 'POST',
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    $("#form-edit")[0].reset();
+                } else {
+                    alert("Error al crear el registro");
+                }
+            }
+        });
+    });
 </script>
 
 
@@ -125,10 +137,9 @@ use App\Models\Medidor;
             icon: "{{ session()->get('alert')['type'] }}",
             title: "{{ session()->get('alert')['message'] }}",
         });
-        @if (session()->has('alert'))
-            @php
-                session()->forget('alert');
-            @endphp
-        @endif
+
+        @php
+            session()->keep('alert');
+        @endphp
     </script>
 @endif

@@ -13,7 +13,8 @@ use App\Models\Canton;
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/medidor" name="form" method="POST">
+                <form id="form-create" name="form" method="POST">
+
                     @csrf
                     <div class="mb-3">
                         <label for="" class="form-label">Cliente Poseedor</label>
@@ -46,7 +47,7 @@ use App\Models\Canton;
 
 
                     <a class="btn btn-secondary" data-bs-dismiss="modal" tabindex="5">Cancelar</a>
-                    <button type="button" id="envio" class="btn btn-success" tabindex="4">Guardar</button>
+                    <button type="button" id="guardar" class="btn btn-success" tabindex="4">Guardar</button>
                 </form>
             </div>
         </div>
@@ -76,7 +77,7 @@ use App\Models\Canton;
         for (var sl of selects) {
             $(sl).select2('destroy');
         }
-        
+
     });
     const Toast = Swal.mixin({
         toast: true,
@@ -89,20 +90,26 @@ use App\Models\Canton;
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     });
+
+    
 </script>
 
 <script>
-    $('#envio').click(function() {
+    // Función para validar campos vacíos
+
+    $('#guardar').click(function() {
+        
         if (document.getElementById('persona').value != '-1' &&
             document.getElementById('canton').value != '-1') {
-            document.form.submit();
+            document.getElementById('form-create').submit();
         } else {
             Toast.fire({
                 icon: 'error',
-                title: 'La selección de Persona y Cantón son necesarias'
+                title: 'Campos vacíos'
             });
         }
-    })
+    });
+    // Función para validar campos vacíos
 </script>
 
 @if (session()->has('alert'))
@@ -111,10 +118,9 @@ use App\Models\Canton;
             icon: "{{ session()->get('alert')['type'] }}",
             title: "{{ session()->get('alert')['message'] }}",
         });
-        @if (session()->has('alert'))
-            @php
-                session()->forget('alert');
-            @endphp
-        @endif
+
+        @php
+            session()->forget('alert');
+        @endphp
     </script>
 @endif
