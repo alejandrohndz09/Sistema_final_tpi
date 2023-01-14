@@ -9,7 +9,8 @@ use App\Models\Canton;
         <div class="modal-content">
             <div class="modal-header">
                 <div class="d-flex align-self-center fs-5 fw-semibold">
-                    <i class="fas fa-tachometer-alt" style="color: #3196cf"></i>&nbsp;<h1 class="fs-5" id="editModalLabel">Crear Registro</h1>
+                    <i class="fas fa-tachometer-alt" style="color: #3196cf"></i>&nbsp;<h1 class="fs-5"
+                        id="editModalLabel">Crear Registro</h1>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -84,22 +85,22 @@ use App\Models\Canton;
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 5000,
+        timer: 2500,
         timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
+        iconColor: 'white',
+        
+        customClass: {
+            popup: 'colored-toast'
+        },
+        
     });
-
-    
 </script>
 
 <script>
     // Función para validar campos vacíos
 
     $('#guardar').click(function() {
-        
+
         if (document.getElementById('persona').value != '-1' &&
             document.getElementById('canton').value != '-1') {
             document.getElementById('form-create').submit();

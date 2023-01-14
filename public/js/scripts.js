@@ -6,7 +6,19 @@
     // 
 // Scripts
 // 
-
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+    iconColor: 'white',
+    
+    customClass: {
+        popup: 'colored-toast'
+    },
+    
+});
 window.addEventListener('DOMContentLoaded', event => {
 
     // Toggle the side navigation
