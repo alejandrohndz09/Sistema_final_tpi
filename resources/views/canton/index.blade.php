@@ -18,7 +18,7 @@ use App\Models\Canton;
                     <div class="col-12 d-flex justify-content-between card-header ">
                         <div class="fs-5 text-center align-self-center">
                             <i class="fas fa-table me-1"></i>
-                            Registrosf
+                            Registros
                         </div>
                         <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"
                             data-bs-whatever="@mdo">

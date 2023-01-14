@@ -15,7 +15,9 @@ use App\Models\Medidor;
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editModalLabel">Editar Registro</h1>
+                <div class="d-flex align-self-center fs-5 fw-semibold">
+                    <i class="fas fa-tachometer-alt" style="color: #3196cf"></i>&nbsp;<h1 class="fs-5" id="editModalLabel">Editar Registro</h1>
+                </div>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -75,8 +77,7 @@ use App\Models\Medidor;
         var customer_id = $(this).data('id');
         $.get('medidor/' + customer_id + '/edit', function(data) {
             obj = data;
-            document.getElementById("editModalLabel").innerHTML = "Editar Registro No." + obj
-                .idMedidores;
+            document.getElementById("editModalLabel").innerHTML = "Editar Registro No." + obj.idMedidores;
             document.getElementById("form-edit").setAttribute("action", "/medidor/update");
             $("#form-edit input[name='id-e']").val(obj.idMedidores);
             document.getElementById("persona-e").value = obj.idPersona;

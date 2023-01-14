@@ -13,7 +13,10 @@ use App\Models\Canton;
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editModalLabel">Editar Registro</h1>
+                <div class="d-flex align-self-center fs-5 fw-semibold">
+                    <i class="fas fa-location-dot" style="color: #3196cf"></i>&nbsp;<h1 class="fs-5" id="editModalLabel">Editar Registro</h1>
+                </div>
+                
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -48,8 +51,7 @@ use App\Models\Canton;
         var customer_id = $(this).data('id');
         $.get('canton/' + customer_id + '/edit', function(data) {
             obj = data;
-            document.getElementById("editModalLabel").innerHTML = "Editar Registro No." + obj
-                .idCanton;
+            document.getElementById("editModalLabel").innerHTML = "Editar Registro No." + obj.idCanton;
             document.getElementById("form-edit").setAttribute("action", "/canton/update");
             $("#form-edit input[name='id-e']").val(obj.idCanton);
             $("#form-edit input[name='nombre-e']").val(obj.nombre);

@@ -7,7 +7,9 @@ use App\Models\Canton;
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="createModalLabel">Crear Registro</h1>
+                <div class="d-flex align-self-center fs-5 fw-semibold">
+                    <i class="fas fa-location-dot" style="color: #3196cf"></i>&nbsp;<h1 class="fs-5" id="editModalLabel">Crear Registro</h1>
+                </div>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
