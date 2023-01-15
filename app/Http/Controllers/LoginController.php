@@ -13,24 +13,46 @@ use Illuminate\Routing\Redirector;
 class LoginController extends Controller
 {
     //
+    public function index(){
+        return view('layouts.login');
+    }
 
     public function show(){
         return view('layouts.login');
     }
 
-   public function login(LoginRequest $request){
-    $credenciales = $request->getCredenciales();
+   public function login(Request $request){
+        $usuario=Usuario::where('contraseña',$request->get('contraseña'))
+                    ->where('correo', $request->get('correo'))
+                    ->first();
+        
+    
 
-    if(!Auth::validate(($credenciales))){
-        return redirect('/dashboard');
-    }
-    $user = Auth::getProvider()->retrieveByCredentials($credenciales);
-
-    Auth::login($user);
-
-    return $this->authenticated($request,$user);
+        if(!$usuario){
+            $url='/';
+            $type='error';
+            $message='Credenciales incorrectas';
+            
+        }else{
+            $url='dashboard';
+            $type='success';
+            $message='Bienvenido';
+            session()->put('usuario', $usuario);
+        }
+       
+        $alert = array(
+            'type' => $type,
+            'message' =>$message
+        );
+        
+        session()->flash('alert',$alert);
+        return  redirect($url);
    }
-
+   public function logout(){
+       session()->forget('usuario');
+       return view('layouts.login');
+    }
+    
    public function authenticated(Request $request,$user){
     return view('dashboard.dashboard');
    }

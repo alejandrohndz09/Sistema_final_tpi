@@ -29,8 +29,8 @@
             </div>
         </div>
         <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            Start Bootstrap
+            <div class="small">Bienvenido</div>
+            {{session()->get('usuario')->persona->nombre.' '.session()->get('usuario')->persona->Apellido}}
         </div>
     </nav>
 </div>
