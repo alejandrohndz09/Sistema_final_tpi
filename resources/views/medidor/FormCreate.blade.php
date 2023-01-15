@@ -92,7 +92,6 @@ use App\Models\Canton;
         customClass: {
             popup: 'colored-toast'
         },
-        
     });
 </script>
 
