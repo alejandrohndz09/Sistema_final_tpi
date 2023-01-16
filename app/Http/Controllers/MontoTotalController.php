@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class ConsultasController
+ * Class MontoTotalController
  * @package App\Http\Controllers
  */
-class ConsultasController extends Controller
+class MontoTotalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,6 +37,8 @@ class ConsultasController extends Controller
         
          return view('consultas.montoTotal')->with('consumo',$consumo);
     }
+
+    
 }
 
 
