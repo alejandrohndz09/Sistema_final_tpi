@@ -30,6 +30,7 @@ use App\Models\Canton;
 
                     </div>
                     <div class="card-body">
+                        <!-- -->
                         <div class="container-fluid">
                             <div class="row">
 

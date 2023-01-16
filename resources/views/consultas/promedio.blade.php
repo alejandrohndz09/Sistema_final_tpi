@@ -18,8 +18,8 @@ use App\Models\Medidores;
                 <div class="card mb-4 shadow-lg">
                     <div class="col-12 d-flex justify-content-between card-header ">
                         <div class="fs-5 text-center align-self-center">
-                            <i class="fas fa-table me-1"></i>
-                            Total Recaudado Por Cantón
+                            <i class="fa fa-tint"></i>
+                            Consumo De Agua Promedio
                         </div>
                         
                     </div>
@@ -39,7 +39,7 @@ use App\Models\Medidores;
                                                     <div class="card-body">
                                                         
                                                         <h5 class="card-title">{{ $c->nombre }}</h5>
-                                                        <p class="card-text">Total ${{ $c->total }}</p>
+                                                        <p class="card-text">Total ${{ $c->lectura }}</p>
                                                         <p class="card-text"><small class="text-muted">
                                                             </small></p>
                                                     </div>
