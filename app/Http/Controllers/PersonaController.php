@@ -19,10 +19,12 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        $personas = Persona::paginate();
-
-        return view('persona.index', compact('personas'))
-            ->with('i', (request()->input('page', 1) - 1) * $personas->perPage());
+        $personas = Persona:: select('personas.idPersona','personas.nombre', 'personas.apellidos', 'personas.telefono', 'personas.idCanton')
+        ->join ('usuario','personas.idPersona','=','usuario.idPersona')
+        -> where ('usuario.rol',1)
+        ->get();
+        
+         return view('persona.index')->with('personas',$personas);
     }
 
     /**

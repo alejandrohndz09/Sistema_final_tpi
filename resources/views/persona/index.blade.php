@@ -36,6 +36,7 @@ use App\Models\Canton;
                                     
                                     <th >DUI</th>
                                     <th>Nombre</th>
+                                    <th>Apellidos</th>
                                     <th>Teléfono</th>
                                     <th>Cantón</th>
                                     <th class="col-sm-1"></th>
@@ -48,7 +49,8 @@ use App\Models\Canton;
                                     <tr>
                                         
                                         <th>{{ $persona->idPersona }}</th>
-                                        <td>{{ $persona->nombre." ".$persona->apellidos }}</td>
+                                        <td>{{ $persona->nombre}}</td>
+                                        <td>{{ $persona->apellidos }}</td>
                                         <td>{{ $persona->telefono }}</td>
                                         <td>{{ $persona->canton->nombre}}</td>
                                         <td >
