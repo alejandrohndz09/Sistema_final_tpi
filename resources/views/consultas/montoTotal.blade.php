@@ -39,7 +39,7 @@ use App\Models\Medidores;
                                     <tr>
                                         
                                         <th>{{ $consumo->nombre }}</th>
-                                        <td>{{ $consumo->monto}}</td>
+                                        <td>{{ $consumo->total}}</td>
                                         <td >
 
                                         </td>
