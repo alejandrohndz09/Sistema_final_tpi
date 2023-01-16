@@ -21,14 +21,19 @@ Route::post('/iniciar-sesion', 'App\Http\Controllers\LoginController@login');
 Route::post('/cerrar-sesion', 'App\Http\Controllers\LoginController@logout');
 
 
-Route::resource('medidor', !auth()->user()?'App\Http\Controllers\MedidorController':$inicio);
+Route::resource('medidor', !session()->has('usuario')?'App\Http\Controllers\MedidorController':$inicio);
 Route::post('/medidor/update', 'App\Http\Controllers\MedidorController@update');
 
 
+<<<<<<< HEAD
 Route::resource('canton', !session()->has('usuario')?'App\Http\Controllers\CantonController':$inicio);
 
+=======
+Route::resource('canton', session()->has('usuario')?'App\Http\Controllers\CantonController':$inicio);
+Route::resource('montoTotal', session()->has('usuario')?'App\Http\Controllers\ConsultasController':$inicio);
+>>>>>>> ac5733d45c6447fbe60e759228df2422473c5411
 Route::post('/canton/update', 'App\Http\Controllers\CantonController@update');
-Route::resource('persona', !session()->has('usuario')?'App\Http\Controllers\PersonaController':$inicio);
+Route::resource('persona', session()->has('usuario')?'App\Http\Controllers\PersonaController':$inicio);
 
 //CONSULTAS
 Route::resource('montoTotal', !session()->has('usuario')?'App\Http\Controllers\MontoTotalController':$inicio);

@@ -26,8 +26,7 @@ use App\Models\Canton;
                         <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"
                             data-bs-whatever="@mdo">
                             <i class="fas fa-add"></i>Agregar
-                        </a>
-                        
+                    </a>                        
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple" class="table">
