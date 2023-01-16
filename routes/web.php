@@ -25,13 +25,8 @@ Route::resource('medidor', !session()->get('usuario')?'App\Http\Controllers\Medi
 Route::post('/medidor/update', 'App\Http\Controllers\MedidorController@update');
 
 
-<<<<<<< HEAD
-Route::resource('canton', !session()->has('usuario')?'App\Http\Controllers\CantonController':$inicio);
-
-=======
 Route::resource('canton', session()->has('usuario')?'App\Http\Controllers\CantonController':$inicio);
 Route::resource('montoTotal', session()->has('usuario')?'App\Http\Controllers\ConsultasController':$inicio);
->>>>>>> ac5733d45c6447fbe60e759228df2422473c5411
 Route::post('/canton/update', 'App\Http\Controllers\CantonController@update');
 Route::resource('persona', session()->has('usuario')?'App\Http\Controllers\PersonaController':$inicio);
 
