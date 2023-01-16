@@ -21,13 +21,13 @@ Route::post('/iniciar-sesion', 'App\Http\Controllers\LoginController@login');
 Route::post('/cerrar-sesion', 'App\Http\Controllers\LoginController@logout');
 
 
-Route::resource('medidor', !auth()->user()?'App\Http\Controllers\MedidorController':$inicio);
+Route::resource('medidor', session()->has('usuario')?'App\Http\Controllers\MedidorController':$inicio);
 Route::post('/medidor/update', 'App\Http\Controllers\MedidorController@update');
 
 
-Route::resource('canton', !session()->has('usuario')?'App\Http\Controllers\CantonController':$inicio);
+Route::resource('canton', session()->has('usuario')?'App\Http\Controllers\CantonController':$inicio);
 Route::post('/canton/update', 'App\Http\Controllers\CantonController@update');
-Route::resource('persona', !session()->has('usuario')?'App\Http\Controllers\PersonaController':$inicio);
+Route::resource('persona', session()->has('usuario')?'App\Http\Controllers\PersonaController':$inicio);
 
 function validar($ruta){
     if( session()->has('usuario')){

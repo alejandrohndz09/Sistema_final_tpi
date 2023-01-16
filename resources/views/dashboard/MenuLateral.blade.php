@@ -30,7 +30,7 @@
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Bienvenido</div>
-            {{session()->get('usuario')->persona->nombre.' '.session()->get('usuario')->persona->Apellido}}
+            {{session()->has('usuario')?session()->get('usuario')->persona->nombre.' '.session()->get('usuario')->persona->Apellido:'unknown'}}
         </div>
     </nav>
 </div>
