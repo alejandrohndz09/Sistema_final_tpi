@@ -26,6 +26,7 @@ Route::post('/medidor/update', 'App\Http\Controllers\MedidorController@update');
 
 
 Route::resource('canton', session()->has('usuario')?'App\Http\Controllers\CantonController':$inicio);
+
 Route::post('/canton/update', 'App\Http\Controllers\CantonController@update');
 Route::resource('persona', session()->has('usuario')?'App\Http\Controllers\PersonaController':$inicio);
 
