@@ -38,6 +38,23 @@ class MontoTotalController extends Controller
          return view('consultas.montoTotal')->with('consumo',$consumo);
     }
 
+    public function Chart()
+    {
+       // $tableconsumo = Consumo::all();
+        $datos = DB::table('consumo')
+            ->select('canton.nombre', DB::raw('SUM(monto) as total'))
+            ->join ('medidores','medidores.idMedidores','=','consumo.idMedidores')
+            ->join ('canton','canton.idCanton','=','medidores.idCanton')
+            ->where('estado','cancelado')
+            ->groupBy('canton.nombre')
+            ->get();
+        
+            $datosMostar = [];
+            foreach ($datos as $consumo){
+            $datosMostar[] =['name' =>$consumo['canton.nombre'],'y'=>floatval($consumo['total'])];
+            }
+         return view('consultas.montoTotal',['data' => json_encode($datosMostar)]);
+    }
     
 }
 

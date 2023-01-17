@@ -2,6 +2,7 @@
 use App\Models\Consultas;
 use App\Models\Cantones;
 use App\Models\Medidores;
+use App\Https\Controllers\MontoTotalController;
 ?>
 @extends('layouts.master')
 
@@ -14,7 +15,8 @@ use App\Models\Medidores;
                         <i class="fas fa-location-dot" style="color: #3196cf"></i>&nbsp;Cantones
                     </div>
                 </div>
-
+                @csrf
+                @method('Chart')
                 <div class="card mb-4 shadow-lg">
                     <div class="col-12 d-flex justify-content-between card-header ">
                         <div class="fs-5 text-center align-self-center">
@@ -52,9 +54,66 @@ use App\Models\Medidores;
                             </div>
                         </div>
                         
-                        
+                    
+                </div>
+                </div> 
+                <div class="card mb-4 shadow-lg">
+                <div class="col-12 d-flex justify-content-between card-header ">
+                        <div class="fs-5 text-center align-self-center">
+                        <script src="https://code.highcharts.com/highcharts.js"></script>
+                        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+                        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-                    </div>
+                        <figure class="highcharts-figure">
+                        <div id="container">
+                            
+                        </div>
+                       </figure>
+
+                <script type="text/javascript">
+
+                   
+                    Highcharts.chart('container', {
+                    chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                 },
+                 title: {
+    text: 'Total Recaudado Por Cantón',
+    align: 'left'
+  },
+  tooltip: {
+    pointFormat: '{series.canton.nombre}: <b>{point.total}</b>'
+  },
+  accessibility: {
+    point: {
+      valueSuffix: '%'
+    }
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        format: '<b>{point.canton.nombre}</b>: {point.total}'
+      }
+    }
+  },
+
+  series: [{
+    name: 'Brands',
+    colorByPoint: true,
+    data: <?= $data?>
+  }]
+                 });
+                </script>
+                </div>
+                </div>
+                </div>
                 </div>
             </div>
         </main>

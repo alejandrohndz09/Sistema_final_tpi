@@ -21,18 +21,18 @@ Route::post('/iniciar-sesion', 'App\Http\Controllers\LoginController@login');
 Route::post('/cerrar-sesion', 'App\Http\Controllers\LoginController@logout');
 
 
-Route::resource('medidor', !session()->get('usuario')?'App\Http\Controllers\MedidorController':$inicio);
+Route::resource('medidor','App\Http\Controllers\MedidorController');
 Route::post('/medidor/update', 'App\Http\Controllers\MedidorController@update');
 
 
-Route::resource('canton', session()->has('usuario')?'App\Http\Controllers\CantonController':$inicio);
+Route::resource('canton','App\Http\Controllers\CantonController');
 
 Route::post('/canton/update', 'App\Http\Controllers\CantonController@update');
-Route::resource('persona', session()->has('usuario')?'App\Http\Controllers\PersonaController':$inicio);
+Route::resource('persona','App\Http\Controllers\PersonaController');
 
 //CONSULTAS
-Route::resource('montoTotal', !session()->has('usuario')?'App\Http\Controllers\MontoTotalController':$inicio);
-Route::resource('promedio', !session()->has('usuario')?'App\Http\Controllers\PromedioController':$inicio);
+Route::resource('montoTotal','App\Http\Controllers\MontoTotalController');
+Route::resource('promedio','App\Http\Controllers\PromedioController');
 
 function validar($ruta){
     if( session()->has('usuario')){
