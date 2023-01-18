@@ -6,19 +6,24 @@
 
 
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <li><a href="/persona/{{ $persona->idPersona }}/edit" class="dropdown-item btn">
+        <li><a href="" id="editarMedidor" class="dropdown-item btn"
+                data-bs-toggle="modal" data-bs-target="#editModal" data-id="{{ $persona->idPersona }}">
                 <i class="fas fa-pencil"></i>&emsp;Editar
             </a>
         </li>
         <li>
-            <form action="{{ route('persona.destroy', $persona->idPersona) }}" method="POST"> 
+            <form action="{{ route('medidor.destroy', $persona->idPersona) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="dropdown-item">
                     <i class="fas fa-trash"></i>&emsp;Eliminar
                 </button>
-           </form> 
+            </form>
         </li>
 
     </ul>
 </div>
+
+<script>
+    
+</script>

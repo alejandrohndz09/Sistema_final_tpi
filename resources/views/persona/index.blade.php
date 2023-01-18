@@ -2,7 +2,7 @@
 
 use App\Models\Persona;
 use App\Models\Canton;
-
+use App\Models\Usuario;
 ?>
 @extends('layouts.master')
 
@@ -33,12 +33,12 @@ use App\Models\Canton;
                             <thead class="table-dark">
                                 <tr>
                                     
-                                    
-                                    <th >DUI</th>
+                                    <th>DUI</th>
                                     <th>Nombre</th>
                                     <th>Apellidos</th>
                                     <th>Teléfono</th>
                                     <th>Cantón</th>
+                                    <th>Correo</th>
                                     <th class="col-sm-1"></th>
                                 </tr>
                             </thead>
@@ -47,22 +47,26 @@ use App\Models\Canton;
                                 @foreach ($personas as $persona)
                                     
                                     <tr>
-                                        
                                         <th>{{ $persona->idPersona }}</th>
                                         <td>{{ $persona->nombre}}</td>
                                         <td>{{ $persona->apellidos }}</td>
                                         <td>{{ $persona->telefono }}</td>
                                         <td>{{ $persona->canton->nombre}}</td>
+                                        <td>{{ $persona->correo}}</td>
                                         <td >
                                           @include('persona.dropdown')
                                         </td>
                                     </tr>
+                                    
                                 @endforeach
                             </tbody>
                         </table>
+                        @include('persona.FormCreate')
+                        @include('persona.FormEdit')
                     </div>
                 </div>
             </div>
         </main>
     </div>
+    
 @endsection

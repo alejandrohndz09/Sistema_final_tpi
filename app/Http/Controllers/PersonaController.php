@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Canton;
 use App\Models\Persona;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 /**
@@ -19,7 +20,7 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        $personas = Persona:: select('personas.idPersona','personas.nombre', 'personas.apellidos', 'personas.telefono', 'personas.idCanton')
+        $personas = Persona:: select('personas.idPersona','personas.nombre', 'personas.apellidos', 'personas.telefono', 'personas.idCanton','usuario.correo')
         ->join ('usuario','personas.idPersona','=','usuario.idPersona')
         -> where ('usuario.rol',1)
         ->get();
@@ -47,12 +48,22 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Persona::$rules);
+        /*request()->validate(Persona::$rules);
 
         $persona = Persona::create($request->all());
 
         return redirect()->route('persona.index')
-            ->with('success', 'Persona created successfully.');
+            ->with('success', 'Persona created successfully.');*/
+
+        Persona::create([
+            'dui' => $request->input('dui'),
+            'nombre' => $request->input('nombre'),
+            'apellido' => $request->input('apellido'),
+            'telefono' => $request->input('telefono'),
+            'idCanton' => $request->input('canton'),
+            'correo' => $request->input('correo')
+        ]);
+        
     }
 
     /**
