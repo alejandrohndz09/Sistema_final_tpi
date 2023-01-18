@@ -94,6 +94,7 @@ class PersonaController extends Controller
         $usuario->idUsuario = $valor;
         $usuario->correo = $request->input('correo');
         $usuario->contraseña = $request->input('contra');   
+        $usuario->rol = 1;  
         $usuario->idPersona = $request->input('dui');
         $usuario->save();
 
