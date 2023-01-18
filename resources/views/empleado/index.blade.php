@@ -10,9 +10,10 @@ use App\Models\Usuario;
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-             <div class="card shadow-lg align-self-center my-4 ">
+    
+            <div class="card shadow-lg align-self-center my-4 ">
                     <div class="my-3 mx-2 fs-1 fw-semibold">
-                        <i class="fas fa-users" style="color: #3196cf"></i>&nbsp;Clientes
+                        <i class="fa-solid fa-user-tie" style="color: #3196cf"></i>&nbsp;Empleados
                     </div>
                 </div>
 
@@ -32,6 +33,7 @@ use App\Models\Usuario;
                         <table id="datatablesSimple" class="table">
                             <thead class="table-dark">
                                 <tr>
+                                    
                                     <th>DUI</th>
                                     <th>Nombre</th>
                                     <th>Apellidos</th>
@@ -42,23 +44,26 @@ use App\Models\Usuario;
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($personas as $persona)
+                              
+                                @foreach ($empleados as $empleado)
+                                    
                                     <tr>
-                                        <th>{{ $persona->idPersona }}</th>
-                                        <td>{{ $persona->nombre}}</td>
-                                        <td>{{ $persona->apellidos}}</td>
-                                        <td>{{ $persona->telefono }}</td>
-                                        <td>{{ $persona->canton->nombre}}</td>
-                                        <td>{{ $persona->correo}}</td>
+                                        <th>{{ $empleado->idPersona }}</th>
+                                        <td>{{ $empleado->nombre}}</td>
+                                        <td>{{ $empleado->apellidos }}</td>
+                                        <td>{{ $empleado->telefono }}</td>
+                                        <td>{{ $empleado->canton->nombre}}</td>
+                                        <td>{{ $empleado->correo}}</td>
                                         <td >
-                                          @include('persona.dropdown')
+                                          @include('empleado.dropdown')
                                         </td>
                                     </tr>
+                                    
                                 @endforeach
                             </tbody>
                         </table>
-                        @include('persona.FormCreate')
-                        
+                       <!--  @include('empleado.FormCreate') -->
+                       <!--  @include('empleado.FormEdit') -->
                     </div>
                 </div>
             </div>
