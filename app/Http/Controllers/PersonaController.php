@@ -55,15 +55,56 @@ class PersonaController extends Controller
         return redirect()->route('persona.index')
             ->with('success', 'Persona created successfully.');*/
 
-        $personas = new Persona();
-        Persona::create([
-            'dui' => $request->input('dui'),
-            'nombre' => $request->input('nombre'),
-            'apellido' => $request->input('apellido'),
-            'telefono' => $request->input('telefono'),
-            'idCanton' => $request->input('canton'),
-        ]);
-            
+
+            $persona = new Persona();
+            $persona->idPersona = $request->input('dui');
+            $persona->nombre = $request->input('nombre');
+            $persona->apellidos = $request->input('apellido');
+            $persona->telefono = $request->input('telefono');
+            $persona->idCanton = $request->input('canton');
+            $persona->save();
+
+        // $personas = new Persona();
+        // Persona::create([
+        //     'idPersona' => $request->input('dui'),
+        //     'nombre' => $request->input('nombre'),
+        //     'apellidos' => $request->input('apellido'),
+        //     'telefono' => $request->input('telefono'),
+        //     'idCanton' => $request->input('canton')
+        // ]);
+        
+            $aleatorio = rand(0, 100000);
+            $temp = explode(" ", $request->input('apellido'));
+            $c = '';
+            $c2 = '';
+        if (count($temp) > 1) {
+            $c = strtoupper($temp[0][0]);
+            $c2 = strtoupper($temp[1][0]);
+        } else {
+            $c = strtoupper($temp[0][0]);
+            $c2 = strtoupper($temp[0][1]);
+        }
+
+        $n = $c;
+        $n2 = $c2;
+        validar($aleatorio);
+        $valor = $n . "" . $n2 . "" . strval(validar($aleatorio));
+
+        $usuario = new Usuario();
+        $usuario->idUsuario = $valor;
+        $usuario->correo = $request->input('correo');
+        $usuario->contraseña = $request->input('contra');   
+        $usuario->idPersona = $request->input('dui');
+        $usuario->save();
+
+        // Usuario::create([
+        //     'idUsuario' => $valor,
+        //     'correo' => $request->input('correo'),
+        //     'contraseña' => $request->input('contra'),
+        //     'rol' => 1,
+        //     'idPersona' => $request->input('dui')
+        // ]);
+
             $alert = array(
                 'type' => 'success',
                 'message' =>'El registro se ha guardado exitosamente'
@@ -71,7 +112,7 @@ class PersonaController extends Controller
             
             session()->flash('alert',$alert);
             
-            return  view('persona.index')->with('persona',$personas);
+            return  view('persona.index')->with('persona',$persona);
     }
 
     /**

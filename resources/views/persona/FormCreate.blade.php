@@ -28,7 +28,7 @@ use App\Models\Canton;
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Apellidos</label>
-                        <input type="text" id="apellido" name="apellido" class="form-control" tabindex="3">
+                        <input type="text" id="apellido " name="apellido" class="form-control" tabindex="3">
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Telefono</label>
@@ -48,6 +48,10 @@ use App\Models\Canton;
                         <label for="" class="form-label">Correo</label>
                         <input type="text" id="correo" name="correo" class="form-control" tabindex="3">
                     </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Contraseña</label>
+                        <input type="password" id="contra" name="contra" class="form-control" tabindex="3">
+                    </div>
                     <a class="btn btn-secondary" data-bs-dismiss="modal" tabindex="5">Cancelar</a>
                     <button type="button" id="guardar" class="btn btn-success" tabindex="4">Guardar</button>
                 </form>
@@ -62,7 +66,7 @@ use App\Models\Canton;
 <script src="{{ url('https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js') }}"></script>
 <script src="{{ url('https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.min.js') }}"></script>
 <script>
-    let selects = ['#canton', '#persona'];
+    let selects = ['#canton'];
 
     $('#createModal').on('shown.bs.modal', function() {
         $(this).find('form')[0].reset();
@@ -80,19 +84,7 @@ use App\Models\Canton;
         }
 
     });
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 2500,
-        timerProgressBar: true,
-        iconColor: 'white',
-        
-        customClass: {
-            popup: 'colored-toast'
-        },
-        
-    });
+    
 </script>
 
 <script>
@@ -100,11 +92,13 @@ use App\Models\Canton;
 
     $('#guardar').click(function() {
 
-        if (document.getElementById('dui').value != '-1' &&
-            document.getElementById('nombre').value != '-1' &&
-            document.getElementById('apellido').value != '-1' &&
-            document.getElementById('telefono').value != '-1' &&
-            document.getElementById('canton').value != '-1'  {
+        if (document.getElementById('dui').value != '' &&
+            document.getElementById('nombre').value != '' &&
+            document.getElementById('apellido').value != '' &&
+            document.getElementById('telefono').value != '' &&
+            document.getElementById('canton').value != '-1' &&
+            document.getElementById('correo').value != '' &&
+            document.getElementById('contra').value != '' ) {
             document.getElementById('form-create').submit();
         } else {
             Toast.fire({
