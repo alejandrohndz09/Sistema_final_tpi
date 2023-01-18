@@ -28,11 +28,11 @@ use App\Models\Canton;
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Apellidos</label>
-                        <input type="text" id="apellido " name="apellido" class="form-control" tabindex="3">
+                        <input type="text" id="apellido" name="apellido" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Telefono</label>
-                        <input type="text" id="telefono" name="telefono" class="form-control" tabindex="3">
+                        <input type="text" id="telefono" name="telefono" class="form-control" >
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Canton</label>

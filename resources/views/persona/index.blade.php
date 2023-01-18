@@ -42,11 +42,11 @@ use App\Models\Usuario;
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($persona as $persona)
+                                @foreach ($personas as $persona)
                                     <tr>
                                         <th>{{ $persona->idPersona }}</th>
                                         <td>{{ $persona->nombre}}</td>
-                                        <td>{{ $persona->apellidos }}</td>
+                                        <td>{{ $persona->apellidos}}</td>
                                         <td>{{ $persona->telefono }}</td>
                                         <td>{{ $persona->canton->nombre}}</td>
                                         <td>{{ $persona->correo}}</td>
@@ -54,9 +54,7 @@ use App\Models\Usuario;
                                           @include('persona.dropdown')
                                         </td>
                                     </tr>
-                                    
                                 @endforeach
-                                
                             </tbody>
                         </table>
                         @include('persona.FormCreate')
