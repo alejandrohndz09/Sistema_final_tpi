@@ -55,15 +55,23 @@ class PersonaController extends Controller
         return redirect()->route('persona.index')
             ->with('success', 'Persona created successfully.');*/
 
+        $personas = new Persona();
         Persona::create([
             'dui' => $request->input('dui'),
             'nombre' => $request->input('nombre'),
             'apellido' => $request->input('apellido'),
             'telefono' => $request->input('telefono'),
             'idCanton' => $request->input('canton'),
-            'correo' => $request->input('correo')
         ]);
-        
+            
+            $alert = array(
+                'type' => 'success',
+                'message' =>'El registro se ha guardado exitosamente'
+            );
+            
+            session()->flash('alert',$alert);
+            
+            return  view('persona.index')->with('persona',$personas);
     }
 
     /**

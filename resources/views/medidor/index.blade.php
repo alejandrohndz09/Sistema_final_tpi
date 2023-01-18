@@ -16,7 +16,6 @@ use App\Models\Canton;
                     </div>
                 </div>
 
-
                 <div class="card mb-4 shadow-lg">
                     <div class="col-12 d-flex justify-content-between card-header ">
                         <div class="fs-5 text-center align-self-center">
@@ -32,7 +31,6 @@ use App\Models\Canton;
                         <table id="datatablesSimple" class="table">
                             <thead class="table-dark">
                                 <tr>
-
 
                                     <th class="col-sm-1">Código</th>
                                     <th>Ubicación/Sector</th>

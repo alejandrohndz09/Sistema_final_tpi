@@ -62,7 +62,7 @@ use App\Models\Canton;
 <script src="{{ url('https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js') }}"></script>
 <script src="{{ url('https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.min.js') }}"></script>
 <script>
-    let selects = ['#canton', '#usuario'];
+    let selects = ['#canton', '#persona'];
 
     $('#createModal').on('shown.bs.modal', function() {
         $(this).find('form')[0].reset();
@@ -104,8 +104,7 @@ use App\Models\Canton;
             document.getElementById('nombre').value != '-1' &&
             document.getElementById('apellido').value != '-1' &&
             document.getElementById('telefono').value != '-1' &&
-            document.getElementById('canton').value != '-1' &&
-            document.getElementById('correo').value != '-1' {
+            document.getElementById('canton').value != '-1'  {
             document.getElementById('form-create').submit();
         } else {
             Toast.fire({

@@ -32,7 +32,6 @@ use App\Models\Usuario;
                         <table id="datatablesSimple" class="table">
                             <thead class="table-dark">
                                 <tr>
-                                    
                                     <th>DUI</th>
                                     <th>Nombre</th>
                                     <th>Apellidos</th>
@@ -43,9 +42,7 @@ use App\Models\Usuario;
                                 </tr>
                             </thead>
                             <tbody>
-                              
                                 @foreach ($personas as $persona)
-                                    
                                     <tr>
                                         <th>{{ $persona->idPersona }}</th>
                                         <td>{{ $persona->nombre}}</td>
@@ -62,7 +59,6 @@ use App\Models\Usuario;
                             </tbody>
                         </table>
                         @include('persona.FormCreate')
-                        @include('persona.FormEdit')
                     </div>
                 </div>
             </div>
