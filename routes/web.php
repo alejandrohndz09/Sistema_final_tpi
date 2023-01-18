@@ -29,6 +29,7 @@ Route::resource('canton','App\Http\Controllers\CantonController');
 
 Route::post('/canton/update', 'App\Http\Controllers\CantonController@update');
 Route::resource('persona','App\Http\Controllers\PersonaController');
+Route::resource('empleado','App\Http\Controllers\EmpleadoController');
 
 //CONSULTAS
 Route::resource('montoTotal','App\Http\Controllers\MontoTotalController');
