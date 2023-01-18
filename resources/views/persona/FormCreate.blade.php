@@ -1,6 +1,7 @@
 <?php
 use App\Models\Persona;
 use App\Models\Canton;
+use App\Models\Usuario;
 ?>
 <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}" type="text/css">
 
