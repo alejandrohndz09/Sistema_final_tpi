@@ -2,26 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consumo;
 use App\Models\Medidor;
 use Illuminate\Http\Request;
 use Redirect,Response;
 /**
- * Class MedidorController
+ * Class ConsumoController
  * @package App\Http\Controllers
  */
-class MedidorController extends Controller
+class ConsumoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $medidores = Medidor::orderby('idCanton','desc')->get();
 
-        return view('medidor.index')->with('medidores',$medidores);
-    
+    public function indexMedidor(){
+        if(session()->has('usuario')){
+            $medidores = Medidor::where('idPersona',session()->get('usuario')->idPersona)->get();
+        }
+        return view('consumo.index-medidor')->with('medidores',$medidores);
+    }
+
+
+    public function listByMedidor($id){
+        $consumos = Consumo::where('idMedidores',$id)->orderby('fecha_a_facturar','desc')->get();
+        $medidor=Medidor::find($id);
+        return view('consumo.index')->with('consumos',$consumos)->with('medidor',$medidor);;
     }
 
     /**
@@ -31,8 +39,8 @@ class MedidorController extends Controller
      */
     public function create()
     {
-        $medidor = new Medidor();
-        return view('medidor.form')->with('medidor', $medidor);   
+        $consumo = new Consumo();
+        return view('consumo.form')->with('consumo', $consumo);   
     }
 
     /**
@@ -44,13 +52,13 @@ class MedidorController extends Controller
     public function store(Request $request)
     {
         
-                Medidor::create([
+                Consumo::create([
                 'idPersona' => $request->input('persona'),
                 'idCanton' => $request->input('canton'),
                 'ruta' => $request->input('ruta'),
                 'referencia' => $request->input('referencia')
             ]);            
-            $medidores = Medidor::where('idCanton',8)->orderby('idCanton','desc')->get();
+            $consumos = Consumo::where('idCanton',8)->orderby('idCanton','desc')->get();
             
             $alert = array(
                 'type' => 'success',
@@ -59,7 +67,7 @@ class MedidorController extends Controller
             
             session()->flash('alert',$alert);
             
-            return  view('medidor.index')->with('medidores',$medidores);
+            return  view('consumo.index')->with('consumos',$consumos);
 
     }
 
@@ -73,9 +81,9 @@ class MedidorController extends Controller
      */
     public function show($id)
     {
-        $medidore = Medidor::find($id);
+        $consumoe = Consumo::find($id);
 
-        session()->flash('medidor',$medidor);
+        session()->flash('consumo',$consumo);
     }
 
     /**
@@ -86,8 +94,8 @@ class MedidorController extends Controller
      */
     public function edit($id)
     {
-        $medidor = Medidor::find($id);
-        return Response::json($medidor);
+        $consumo = Consumo::find($id);
+        return Response::json($consumo);
     }
 
    
@@ -95,18 +103,18 @@ class MedidorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Medidor $medidore
+     * @param  Consumo $consumoe
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-        $medidor = Medidor::find( $request->get('id-e'));
-        $medidor->idPersona = $request->get('persona-e');
-        $medidor->idCanton = $request->get('canton-e');
-        $medidor->ruta = $request->get('ruta-e');
-        $medidor->referencia = $request->get('referencia-e');
-        $medidor->save();
-        $medidores = Medidor::where('idCanton',8)->orderby('idCanton','desc')->get();
+        $consumo = Consumo::find( $request->get('id-e'));
+        $consumo->idPersona = $request->get('persona-e');
+        $consumo->idCanton = $request->get('canton-e');
+        $consumo->ruta = $request->get('ruta-e');
+        $consumo->referencia = $request->get('referencia-e');
+        $consumo->save();
+        $consumos = Consumo::where('idCanton',8)->orderby('idCanton','desc')->get();
             
         $alert = array(
             'type' => 'success',
@@ -115,7 +123,7 @@ class MedidorController extends Controller
         
         session()->flash('alert',$alert);
         
-        return  redirect('/medidor');
+        return  redirect('/consumo');
     }
 
     /**
@@ -125,13 +133,13 @@ class MedidorController extends Controller
      */
     public function destroy($id)
     {
-        $medidore = Medidor::find($id)->delete();
+        $consumoe = Consumo::find($id)->delete();
         $alert = array(
             'type' => 'success',
             'message' =>'El registro se ha eliminado exitosamente'
         );
         
         session()->flash('alert',$alert);
-        return redirect()->route('medidor.index');;
+        return redirect()->route('consumo.index');;
     }
 }

@@ -26,11 +26,14 @@ Route::post('/medidor/update', 'App\Http\Controllers\MedidorController@update');
 
 
 Route::resource('canton','App\Http\Controllers\CantonController');
-
 Route::post('/canton/update', 'App\Http\Controllers\CantonController@update');
+
 Route::resource('persona','App\Http\Controllers\PersonaController');
 Route::resource('empleado','App\Http\Controllers\EmpleadoController');
 
+Route::get('consumo','App\Http\Controllers\ConsumoController@indexMedidor');
+Route::get('consumo/{id}','App\Http\Controllers\ConsumoController@listByMedidor');
+Route::post('/consumo/update', 'App\Http\Controllers\ConsumoController@update');
 //CONSULTAS
 Route::resource('montoTotal','App\Http\Controllers\MontoTotalController');
 Route::resource('promedio','App\Http\Controllers\PromedioController');
