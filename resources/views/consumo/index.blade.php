@@ -51,9 +51,7 @@ use App\Models\Canton;
                                                 </div>
                                             </div>
                                         </div>
-
                                         @include('medidor.dropdown')
-
                                     </div>
                                 @endforeach
                             </div>
