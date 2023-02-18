@@ -40,8 +40,8 @@ use App\Https\Controllers\MontoTotalController;
                                                     <i class="fa fa-map-pin" aria-hidden="true" ></i>
                                                     <div class="card-body">
                                                         
-                                                        <h5 class="card-title">{{ $c->nombre }}</h5>
-                                                        <p class="card-text">Total ${{ $c->total }}</p>
+                                                        <h5 class="card-title">{{ c->nombre }}</h5>
+                                                        <p class="card-text">Total {{ $c->total }}</p>
                                                         <p class="card-text"><small class="text-muted">
                                                             </small></p>
                                                     </div>
@@ -99,7 +99,7 @@ use App\Https\Controllers\MontoTotalController;
       cursor: 'pointer',
       dataLabels: {
         enabled: true,
-        format: '<b>{point.canton.nombre}</b>: {point.total}'
+        format: '<b>{{point.canton.nombre}</b>: {point.total}'
       }
     }
   },
@@ -107,7 +107,7 @@ use App\Https\Controllers\MontoTotalController;
   series: [{
     name: 'Brands',
     colorByPoint: true,
-    data: <?= $data?>
+    data: <?= $consumo?>
   }]
                  });
                 </script>

@@ -39,15 +39,20 @@
                 <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
                     data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#generarcierre">
+                        <a class="nav-link" href="/montoTotal" data-toggle="modal" data-target="#generarcierre">
                             <div class="sb-nav-link-icon"><i style="color: #3196cf !important"
                                     class="fas fa-chart-column"></i></div>
                             Ingresos mensuales/canton
                         </a>
-                        <a class="nav-link" href="inicioperiodo.jsp">
+                        <a class="nav-link" href="/promedio">
                             <div class="sb-nav-link-icon"><i style="color: #3196cf !important"
                                     class="fas fa-chart-pie"></i></div>
                             Consumo promedio de agua/Cantón
+                        </a>
+                        <a class="nav-link" href="/resumen">
+                            <div class="sb-nav-link-icon"><i style="color: #3196cf !important"
+                                    class="fas fa-chart-pie"></i></div>
+                            Resumen de Recibos Pagados
                         </a>
                     </nav>
                 </div>
