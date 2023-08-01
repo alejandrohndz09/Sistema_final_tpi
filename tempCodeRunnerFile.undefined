@@ -1,0 +1,21 @@
+.model small
+.stack
+.data
+titulo1 db "Suma 1","$"
+titulo2 db "Suma 2","$"
+salto db 13,10,"$"
+cap1 db "Ingrese el primer numero: ","$"
+cap2 db "Ingrese el segundo numero: ","$"
+msj1 db "Son iguales"
+msj1 db "el resultado 1 es mayor"
+msj2 db "el resultado 1 es menor"
+res1 db 0
+res2 db 0
+.code
+inicio:
+mov ax, @data
+mov ds,ax
+
+  salir: 
+    .exit
+end inicio

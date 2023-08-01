@@ -22,6 +22,7 @@ class LoginController extends Controller
     }
 
    public function login(Request $request){
+   
         $usuario=Usuario::where('contraseña',$request->get('contraseña'))
                     ->where('correo', $request->get('correo'))
                     ->first();
@@ -37,6 +38,8 @@ class LoginController extends Controller
             $url='dashboard';
             $type='success';
             $message='Bienvenido';
+           // session_start();
+            //$_SESSION["uss"]=$usuario;
             session()->put('usuario', $usuario);
         }
        

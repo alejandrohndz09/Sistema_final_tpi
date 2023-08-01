@@ -2,7 +2,7 @@
 use App\Models\Persona;
 use App\Models\Canton;
 ?>
-<link rel="stylesheet" href="{{ asset('css/select2.min.css') }}" type="text/css">
+
 
 <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -59,8 +59,11 @@ use App\Models\Canton;
 <!-- Archivos JavaScript de Select2 -->
 
 <script src="{{ url('https://code.jquery.com/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ url('https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js') }}"></script>
+
 <script src="{{ url('https://cdn.jsdelivr.net/npm/sweetalert2@10.3.5/dist/sweetalert2.min.js') }}"></script>
+<script src="{{ url('https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js') }}"></script>
+
+<link rel="stylesheet" href="{{ asset('css/select2.min.css') }}" type="text/css">
 <script>
     let selects = ['#canton', '#persona'];
 
